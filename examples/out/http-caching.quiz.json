@@ -1,0 +1,681 @@
+{
+  "quiz": {
+    "title": "HTTP Caching: Check Your Understanding",
+    "items": [
+      {
+        "key": "q01",
+        "passageId": "p02",
+        "skill": "understand",
+        "difficulty": "easy",
+        "focus": "Why responses with personal data must never be stored in a shared cache",
+        "content": {
+          "type": "mcq",
+          "question": "Why must a response that contains personal data never be stored in a shared cache such as a CDN?",
+          "options": [
+            "A shared cache serves the same stored response to many people",
+            "A shared cache deletes stored responses after one hour",
+            "A shared cache can only store compressed responses",
+            "A shared cache never revalidates its stored copies"
+          ],
+          "answer": "A shared cache serves the same stored response to many people",
+          "explanation": "Whatever a shared cache stores can be handed to the next person who requests the same URL, so one user's data could reach someone else.",
+          "sourceQuote": "Because a shared cache serves the same stored response to many people, a response that contains personal data must never be stored there."
+        },
+        "generation": {
+          "rounds": 1,
+          "model": "replay",
+          "fixed": [],
+          "warnings": [],
+          "revisedAfterJudge": false
+        },
+        "judge": {
+          "status": "ok",
+          "dims": {
+            "grounded": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.85,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "single_answer": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.9,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "clarity": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.8,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "distractors": {
+              "score": 0.9,
+              "status": "ok",
+              "threshold": 0.8,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "difficulty_fit": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.75,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            }
+          },
+          "failing": [],
+          "blockers": [],
+          "tier": "screen",
+          "escalated": false,
+          "model": "replay"
+        }
+      },
+      {
+        "key": "q02",
+        "passageId": "p03",
+        "skill": "understand",
+        "difficulty": "medium",
+        "focus": "What s-maxage changes compared with max-age",
+        "content": {
+          "type": "mcq",
+          "question": "What does the s-maxage directive do?",
+          "options": [
+            "It doubles max-age for every cache on the path",
+            "It sets the lifetime in minutes instead of seconds",
+            "It overrides max-age, but only for shared caches",
+            "It overrides max-age, but only for the browser"
+          ],
+          "answer": "It overrides max-age, but only for shared caches",
+          "explanation": "s-maxage is read by shared caches such as CDNs and proxies; a private cache like the browser keeps using max-age.",
+          "sourceQuote": "Shared caches also understand s-maxage, which overrides max-age for them only."
+        },
+        "generation": {
+          "rounds": 2,
+          "model": "replay",
+          "fixed": [
+            "mcq_key_is_longest"
+          ],
+          "warnings": [],
+          "revisedAfterJudge": false
+        },
+        "judge": {
+          "status": "ok",
+          "dims": {
+            "grounded": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.85,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "single_answer": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.9,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "clarity": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.8,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "distractors": {
+              "score": 0.9,
+              "status": "ok",
+              "threshold": 0.8,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "difficulty_fit": {
+              "score": 0.9,
+              "status": "ok",
+              "threshold": 0.75,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            }
+          },
+          "failing": [],
+          "blockers": [],
+          "tier": "screen",
+          "escalated": false,
+          "model": "replay"
+        }
+      },
+      {
+        "key": "q03",
+        "passageId": "p05",
+        "skill": "understand",
+        "difficulty": "medium",
+        "focus": "no-cache allows storing but requires revalidation before every reuse",
+        "content": {
+          "type": "true_false",
+          "statement": "A response sent with no-cache may be stored, but the cache must revalidate it with the server before reusing it.",
+          "answer": true,
+          "explanation": "no-cache does not forbid storing; it requires a check with the server before every reuse. no-store is the directive that forbids keeping the response.",
+          "sourceQuote": "no-cache does not forbid storing a response; it means the cache must revalidate with the server before every reuse."
+        },
+        "generation": {
+          "rounds": 1,
+          "model": "replay",
+          "fixed": [],
+          "warnings": [],
+          "revisedAfterJudge": false
+        },
+        "judge": {
+          "status": "ok",
+          "dims": {
+            "grounded": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.85,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "single_answer": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.9,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "clarity": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.8,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "difficulty_fit": {
+              "score": 0.9,
+              "status": "ok",
+              "threshold": 0.75,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            }
+          },
+          "failing": [],
+          "blockers": [],
+          "tier": "screen",
+          "escalated": false,
+          "model": "replay"
+        }
+      },
+      {
+        "key": "q04",
+        "passageId": "p04",
+        "skill": "recall",
+        "difficulty": "easy",
+        "focus": "What the server sends when a conditional request finds the resource unchanged",
+        "content": {
+          "type": "mcq",
+          "question": "A cache revalidates a stale response and the resource has not changed. What does the server send back?",
+          "options": [
+            "304 Not Modified with no body",
+            "200 OK with the full content",
+            "404 Not Found with no body",
+            "412 Precondition Failed"
+          ],
+          "answer": "304 Not Modified with no body",
+          "explanation": "A 304 tells the cache that its stored copy is still valid, so nothing is downloaded again; a full 200 OK is sent only when the resource changed.",
+          "sourceQuote": "When nothing has changed, the server replies with 304 Not Modified and no body, and the cache marks its copy fresh again."
+        },
+        "generation": {
+          "rounds": 2,
+          "model": "replay",
+          "fixed": [
+            "quote_not_in_passage"
+          ],
+          "warnings": [],
+          "revisedAfterJudge": false
+        },
+        "judge": {
+          "status": "ok",
+          "dims": {
+            "grounded": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.85,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "single_answer": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.9,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "clarity": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.8,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "distractors": {
+              "score": 0.85,
+              "status": "ok",
+              "threshold": 0.8,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "difficulty_fit": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.75,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            }
+          },
+          "failing": [],
+          "blockers": [],
+          "tier": "screen",
+          "escalated": false,
+          "model": "replay"
+        }
+      },
+      {
+        "key": "q05",
+        "passageId": "p04",
+        "skill": "recall",
+        "difficulty": "easy",
+        "focus": "The request header that carries a stored ETag during revalidation",
+        "content": {
+          "type": "fill_blank",
+          "sentence": "To revalidate a response that came with an ETag, the cache sends that ETag back in the ____ request header.",
+          "answer": "If-None-Match",
+          "alternatives": [],
+          "explanation": "If-None-Match carries the ETag; If-Modified-Since is the date-based equivalent used with Last-Modified.",
+          "sourceQuote": "If the stored response included an ETag, an opaque identifier for one version of the resource, the cache sends it back in an If-None-Match header."
+        },
+        "generation": {
+          "rounds": 1,
+          "model": "replay",
+          "fixed": [],
+          "warnings": [],
+          "revisedAfterJudge": false
+        },
+        "judge": {
+          "status": "ok",
+          "dims": {
+            "grounded": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.85,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "single_answer": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.9,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "clarity": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.8,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "difficulty_fit": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.75,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            }
+          },
+          "failing": [],
+          "blockers": [],
+          "tier": "screen",
+          "escalated": false,
+          "model": "replay"
+        }
+      },
+      {
+        "key": "q06",
+        "passageId": "p06",
+        "skill": "apply",
+        "difficulty": "hard",
+        "focus": "What a cache does with a response under max-age=60, stale-while-revalidate=300 after three minutes",
+        "content": {
+          "type": "mcq",
+          "question": "A response is sent with max-age=60, stale-while-revalidate=300. A request for it arrives three minutes later. What does the cache do?",
+          "options": [
+            "Discards the copy and downloads the full response again first",
+            "Serves the stale copy at once and refreshes it in the background",
+            "Serves the copy as fresh without contacting the server at all",
+            "Holds the request until the server confirms the copy is valid"
+          ],
+          "answer": "Serves the stale copy at once and refreshes it in the background",
+          "explanation": "After one minute the response is stale, but stale-while-revalidate lets the cache serve it for up to five more minutes while it refreshes the copy in the background.",
+          "sourceQuote": "For example, max-age=60, stale-while-revalidate=300 keeps a response fresh for one minute and allows it to be served stale for up to five more minutes while a refresh happens."
+        },
+        "generation": {
+          "rounds": 2,
+          "model": "replay",
+          "fixed": [],
+          "warnings": [],
+          "revisedAfterJudge": true
+        },
+        "judge": {
+          "status": "ok",
+          "dims": {
+            "grounded": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.85,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "single_answer": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.9,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "clarity": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.8,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "distractors": {
+              "score": 0.9,
+              "status": "ok",
+              "threshold": 0.8,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "difficulty_fit": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.75,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            }
+          },
+          "failing": [],
+          "blockers": [],
+          "tier": "screen",
+          "escalated": false,
+          "model": "replay"
+        }
+      },
+      {
+        "key": "q07",
+        "passageId": "p07",
+        "skill": "understand",
+        "difficulty": "medium",
+        "focus": "Why content-hashed file names make a one-year lifetime safe",
+        "content": {
+          "type": "true_false",
+          "statement": "A file named with a hash of its content can be cached for a year, because any change to the file produces a new URL.",
+          "answer": true,
+          "explanation": "When the content changes, the hash in the name changes too, so pages point to a URL no cache has stored yet.",
+          "sourceQuote": "When the file changes, its name changes, so the HTML points to a URL the cache has never seen."
+        },
+        "generation": {
+          "rounds": 1,
+          "model": "replay",
+          "fixed": [],
+          "warnings": [],
+          "revisedAfterJudge": false
+        },
+        "judge": {
+          "status": "ok",
+          "dims": {
+            "grounded": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.85,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "single_answer": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.9,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "clarity": {
+              "score": 0.8,
+              "status": "ok",
+              "threshold": 0.8,
+              "pass": true,
+              "issues": [],
+              "evidence": null,
+              "evidenceDiscarded": true
+            },
+            "difficulty_fit": {
+              "score": 0.9,
+              "status": "ok",
+              "threshold": 0.75,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            }
+          },
+          "failing": [],
+          "blockers": [],
+          "tier": "screen",
+          "escalated": false,
+          "model": "replay"
+        }
+      },
+      {
+        "key": "q08",
+        "passageId": "p08",
+        "skill": "analyze",
+        "difficulty": "hard",
+        "focus": "Why naming too many headers in Vary lowers the cache hit rate",
+        "content": {
+          "type": "short_answer",
+          "question": "Why should a server list only the headers that really change a response in its Vary header?",
+          "modelAnswer": "Each header named in Vary makes the cache keep a separate copy for every value of that header. Naming headers that do not change the response splits the cache into near-identical copies, so fewer requests find a match and the hit rate drops.",
+          "rubric": [
+            "Vary makes the cache store separate copies per value of the listed headers",
+            "Unneeded headers split the cache into more copies than necessary",
+            "More copies means fewer requests are served from the cache"
+          ],
+          "sourceQuote": "Listing too many headers in Vary fragments the cache and lowers the hit rate, so it should name only the headers that actually change the response."
+        },
+        "generation": {
+          "rounds": 1,
+          "model": "replay",
+          "fixed": [],
+          "warnings": [],
+          "revisedAfterJudge": false
+        },
+        "judge": {
+          "status": "ok",
+          "dims": {
+            "grounded": {
+              "score": 0.95,
+              "status": "ok",
+              "threshold": 0.85,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "clarity": {
+              "score": 1,
+              "status": "ok",
+              "threshold": 0.8,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            },
+            "difficulty_fit": {
+              "score": 0.9,
+              "status": "ok",
+              "threshold": 0.75,
+              "pass": true,
+              "issues": [],
+              "evidence": null
+            }
+          },
+          "failing": [],
+          "blockers": [],
+          "tier": "screen",
+          "escalated": false,
+          "model": "replay"
+        }
+      }
+    ]
+  },
+  "source": {
+    "title": "How HTTP Caching Works",
+    "origin": "examples/sources/http-caching.md",
+    "hash": "ae722a05e49789e6",
+    "words": 669,
+    "passages": [
+      {
+        "id": "p01",
+        "heading": "Why caches exist",
+        "text": "Every time a browser loads a page, it may ask servers for dozens of files: HTML, stylesheets, scripts, images and fonts. Most of these files do not change between visits. HTTP caching lets a client keep a copy of a response and reuse it later, so the next request is answered from the copy instead of the network. A cache hit saves bandwidth, makes pages load faster, and takes load off the origin server.",
+        "words": 74
+      },
+      {
+        "id": "p02",
+        "heading": "Where responses are cached",
+        "text": "There are two kinds of cache. A private cache belongs to one user; the browser's own cache is the usual example. A shared cache sits between many users and the origin server, such as a CDN or a proxy run by a company. Because a shared cache serves the same stored response to many people, a response that contains personal data must never be stored there. The Cache-Control: private directive tells shared caches not to store a response while still allowing the browser to keep it.",
+        "words": 86
+      },
+      {
+        "id": "p03",
+        "heading": "Freshness",
+        "text": "A stored response is fresh for a limited time, called its freshness lifetime. The server sets this with Cache-Control: max-age=N, where N is a number of seconds. A response sent with max-age=3600 can be reused for one hour without asking the server again. Shared caches also understand s-maxage, which overrides max-age for them only. When a response carries no freshness information at all, caches may estimate a lifetime from the Last-Modified header, a practice called heuristic caching. Once the lifetime runs out, the response becomes stale.",
+        "words": 86
+      },
+      {
+        "id": "p04",
+        "heading": "Validation and conditional requests",
+        "text": "A stale response is not necessarily useless. Instead of downloading the file again, the cache can ask the server whether its copy is still valid. This is called revalidation, and it uses conditional requests. If the stored response included an ETag, an opaque identifier for one version of the resource, the cache sends it back in an If-None-Match header. If the response included Last-Modified, the cache can send that date in If-Modified-Since. When nothing has changed, the server replies with 304 Not Modified and no body, and the cache marks its copy fresh again. Only when the resource has changed does the server send a full 200 OK response with the new content.",
+        "words": 113
+      },
+      {
+        "id": "p05",
+        "heading": "no-cache is not no-store",
+        "text": "Two directives are often confused. no-cache does not forbid storing a response; it means the cache must revalidate with the server before every reuse. no-store is the strict one: it tells every cache not to keep the response at all. Sensitive responses, such as a bank statement, should use no-store, while pages that must always be current but are expensive to send in full can use no-cache together with an ETag, so most checks end in a small 304.",
+        "words": 79
+      },
+      {
+        "id": "p06",
+        "heading": "Serving stale content on purpose",
+        "text": "Sometimes a slightly old response is better than a slow one. The stale-while-revalidate directive lets a cache serve a stale response immediately while it revalidates in the background, so the next visitor gets the updated copy. For example, max-age=60, stale-while-revalidate=300 keeps a response fresh for one minute and allows it to be served stale for up to five more minutes while a refresh happens.",
+        "words": 64
+      },
+      {
+        "id": "p07",
+        "heading": "Versioned URLs and immutable files",
+        "text": "Long freshness lifetimes raise a problem: how do users get a new version of a file that their cache considers fresh for a year? The common answer is cache busting. Build tools put a hash of the file's content into its name, such as app.3f9a2c.js. When the file changes, its name changes, so the HTML points to a URL the cache has never seen. Files named this way can safely be sent with max-age=31536000, immutable; the immutable directive tells the browser not to revalidate the file even when the user reloads the page.",
+        "words": 93
+      },
+      {
+        "id": "p08",
+        "heading": "Responses that vary",
+        "text": "A server can return different content for the same URL, for example compressed or uncompressed, or in different languages. The Vary header lists the request headers that influenced the response. With Vary: Accept-Encoding, a cache stores separate copies for clients that accept gzip and those that do not. Listing too many headers in Vary fragments the cache and lowers the hit rate, so it should name only the headers that actually change the response.",
+        "words": 74
+      }
+    ]
+  },
+  "report": {
+    "runId": "replay-0d58b04d",
+    "mode": "replay",
+    "startedAt": "2026-10-24T20:16:40.448Z",
+    "ms": 36,
+    "source": {
+      "title": "How HTTP Caching Works",
+      "origin": "examples/sources/http-caching.md",
+      "words": 669,
+      "passages": 8
+    },
+    "planned": 8,
+    "delivered": 8,
+    "dropped": [],
+    "firstTry": 5,
+    "fixedByRetry": 2,
+    "revisedAfterJudge": 1,
+    "defectsCaught": {
+      "mcq_key_is_longest": 1,
+      "quote_not_in_passage": 1
+    },
+    "judge": {
+      "graded": 8,
+      "escalations": 1,
+      "notRun": 0,
+      "passed": 8
+    },
+    "byRole": {
+      "planner": {
+        "calls": 2,
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "costUsd": 0
+      },
+      "writer": {
+        "calls": 11,
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "costUsd": 0
+      },
+      "judge_screen": {
+        "calls": 9,
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "costUsd": 0
+      },
+      "judge_full": {
+        "calls": 1,
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "costUsd": 0
+      }
+    },
+    "costUsd": 0,
+    "warnings": []
+  }
+}
