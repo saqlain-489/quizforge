@@ -4,7 +4,7 @@
 
 ![Taking the demo quiz: the answer's source quote is highlighted in the passage it came from](docs/screenshots/quiz.png)
 
-**Live demo:** _coming soon_ · **Run it free:** `npm install && npm run demo`
+**Live demo:** [saqlain-489.github.io/quizforge](https://saqlain-489.github.io/quizforge/) · **Run it free:** `npm install && npm run demo`
 
 [![ci](https://github.com/saqlain-489/quizforge/actions/workflows/ci.yml/badge.svg)](https://github.com/saqlain-489/quizforge/actions/workflows/ci.yml)
 
