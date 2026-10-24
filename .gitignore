@@ -3,3 +3,10 @@ runs/
 .env
 *.log
 .DS_Store
+
+# web viewer
+web/.next/
+web/out/
+web/src/data/
+web/next-env.d.ts
+web/*.tsbuildinfo
