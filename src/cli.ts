@@ -3,13 +3,13 @@ import { basename, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { checkItem } from './checks/index.ts';
-import { loadSource } from './ingest.ts';
 import { anthropicLLM } from './llm/anthropic.ts';
 import { loadReplay, replayLLM } from './llm/replay.ts';
 import { CallLog, type LLM } from './llm/types.ts';
-import { runPipeline, type PipelineEvent } from './pipeline.ts';
+import type { PipelineEvent } from './pipeline.ts';
 import { summaryLines, toMarkdown } from './report.ts';
 import { ITEM_TYPES, type ItemType, type QuizRun } from './schema.ts';
+import { runQuizWorkflow } from './workflow.ts';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -46,11 +46,9 @@ async function generate(source: string, flags: { count: number; types: ItemType[
   const log = new CallLog();
   const llm: LLM = flags.replay ? replayLLM(loadReplay(flags.replay), log) : anthropicLLM({ log });
   if (!llm.available()) throw new Error('ANTHROPIC_API_KEY is not set. Set it, or try `quizforge demo` for a free replay.');
-  const doc = await loadSource(source);
-  console.log(`source ${doc.title} · ${doc.words} words · ${doc.passages.length} passages`);
-  const run = await runPipeline(doc, { count: flags.count, types: flags.types }, { llm, log, judge: flags.judge, onEvent: logEvent });
+  const run = await runQuizWorkflow({ source, count: flags.count, types: flags.types }, { llm, log, judge: flags.judge, onEvent: logEvent });
   const base = await save(run, flags.out, slug(source));
-  console.log(['', ...summaryLines(run), `Saved ${base}.json and ${base}.md`].join('\n'));
+  console.log(['', `Source: ${run.source.title} (${run.source.words} words, ${run.source.passages.length} passages)`, ...summaryLines(run), `Saved ${base}.json and ${base}.md`].join('\n'));
   return run;
 }
 
