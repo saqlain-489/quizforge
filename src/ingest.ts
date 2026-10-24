@@ -1,5 +1,5 @@
 import { readFile } from 'node:fs/promises';
-import { basename, extname } from 'node:path';
+import { basename, extname, isAbsolute, relative } from 'node:path';
 import type { Passage, SourceDoc } from './schema.ts';
 import { pad2, sha, wordCount } from './text.ts';
 
@@ -20,9 +20,17 @@ export async function loadSource(input: string): Promise<SourceDoc> {
     return type.includes('html') || /^\s*</.test(body) ? fromHtml(body, input) : fromText(body, input);
   }
   const ext = extname(input).toLowerCase();
-  if (ext === '.pdf') return fromPdf(new Uint8Array(await readFile(input)), input);
+  const origin = displayPath(input);
+  if (ext === '.pdf') return fromPdf(new Uint8Array(await readFile(input)), origin);
   const body = await readFile(input, 'utf8');
-  return ext === '.html' || ext === '.htm' ? fromHtml(body, input) : fromText(body, input);
+  return ext === '.html' || ext === '.htm' ? fromHtml(body, origin) : fromText(body, origin);
+}
+
+/** Saved runs name their source relative to where they ran, never by an absolute home path. */
+function displayPath(p: string): string {
+  if (!isAbsolute(p)) return p;
+  const rel = relative(process.cwd(), p);
+  return rel && !rel.startsWith('..') && !isAbsolute(rel) ? rel : basename(p);
 }
 
 export function fromText(markdown: string, origin: string): SourceDoc {

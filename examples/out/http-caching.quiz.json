@@ -623,10 +623,10 @@
     ]
   },
   "report": {
-    "runId": "replay-d19cfe67",
+    "runId": "replay-d71e1cfe",
     "mode": "replay",
-    "startedAt": "2026-10-24T20:21:45.991Z",
-    "ms": 45,
+    "startedAt": "2026-10-24T21:22:30.923Z",
+    "ms": 58,
     "source": {
       "title": "How HTTP Caching Works",
       "origin": "examples/sources/http-caching.md",
