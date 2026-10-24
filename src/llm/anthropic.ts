@@ -1,5 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { betaZodOutputFormat } from '@anthropic-ai/sdk/helpers/beta/zod';
+import type { z } from 'zod';
 import { chainsFromEnv, costOf, type RoleChain } from '../models.ts';
 import type { Role } from '../schema.ts';
 import { CallLog, type GenerateArgs, type GenerateResult, type LLM } from './types.ts';
@@ -19,6 +20,17 @@ export function isUnavailable(err: unknown): boolean {
   return err instanceof Anthropic.RateLimitError
     || err instanceof Anthropic.InternalServerError
     || err instanceof Anthropic.APIConnectionError;
+}
+
+/** The structured reply, or null when it is missing, truncated or off-schema; the caller retries with feedback. */
+function parseObject<T>(blocks: Anthropic.Beta.BetaContentBlock[], schema: z.ZodType<T>): T | null {
+  const text = blocks.flatMap((b) => (b.type === 'text' ? [b.text] : [])).join('');
+  try {
+    const parsed = schema.safeParse(JSON.parse(text));
+    return parsed.success ? parsed.data : null;
+  } catch {
+    return null;
+  }
 }
 
 export function anthropicLLM(opts: AnthropicLLMOptions = {}): LLM {
@@ -42,7 +54,8 @@ export function anthropicLLM(opts: AnthropicLLMOptions = {}): LLM {
           if (args.context) content.push({ type: 'text', text: args.context, cache_control: { type: 'ephemeral' } });
           content.push({ type: 'text', text: args.prompt });
 
-          const res = await client.beta.messages.parse(
+          // create(), not parse(): parse() throws on a refusal or truncated JSON before stop_reason can be read.
+          const res = await client.beta.messages.create(
             {
               model,
               max_tokens: 16000,
@@ -64,11 +77,13 @@ export function anthropicLLM(opts: AnthropicLLMOptions = {}): LLM {
           };
           const served = res.model || model;
           const refused = res.stop_reason === 'refusal';
+          const object = refused ? null : parseObject(res.content, args.schema);
           log.add({
-            role: args.role, tag: args.tag, model: served, ok: !refused, ms: Date.now() - t0, ...usage,
-            costUsd: costOf(served, usage), note: refused ? 'refusal' : res.stop_reason === 'max_tokens' ? 'max_tokens' : undefined,
+            role: args.role, tag: args.tag, model: served, ok: object !== null, ms: Date.now() - t0, ...usage,
+            costUsd: costOf(served, usage),
+            note: refused ? 'refusal' : object === null ? `unparseable (stop: ${res.stop_reason})` : undefined,
           });
-          return { object: refused ? null : ((res.parsed_output ?? null) as T | null), refused, model: served, usage, stopReason: res.stop_reason };
+          return { object, refused, model: served, usage, stopReason: res.stop_reason };
         } catch (err) {
           if (!isUnavailable(err)) throw err;
           lastErr = err;

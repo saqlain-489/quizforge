@@ -91,7 +91,7 @@ function cleanInline(s: string): string {
 export function htmlToMarkdown(html: string): string {
   return decodeEntities(
     html
-      .replace(/<(script|style|noscript|svg|nav|header|footer|aside|form|template)\b[\s\S]*?<\/\1>/gi, ' ')
+      .replace(/<(head|title|script|style|noscript|svg|nav|header|footer|aside|form|template)\b[\s\S]*?<\/\1>/gi, ' ')
       .replace(/<!--[\s\S]*?-->/g, ' ')
       .replace(/<h([1-6])\b[^>]*>([\s\S]*?)<\/h\1>/gi, (_, n: string, t: string) => `\n\n${'#'.repeat(Number(n))} ${t.replace(/<[^>]+>/g, '').trim()}\n\n`)
       .replace(/<(p|div|section|article|li|tr|blockquote|pre)\b[^>]*>/gi, '\n\n')
